@@ -1,61 +1,14 @@
-set fileencodings=ucs-bom,utf-8,cp936,gb10830
-"set encoding=utf-8
-set termencoding=utf-8
-
 set nocompatible
-filetype off
+filetype on
 source $VIMRUNTIME/mswin.vim
 behave mswin
-
-set rtp+=$VIM/vimfiles/bundle/vundle
-let path='$VIM/vimfiles/bundle'
-call vundle#begin('$VIM/vimfiles/bundle')
-
-Plugin 'gmarik/vundle'
-Plugin 'scrooloose/nerdtree'		"树形浏览文件管理插件
-"Plugin 'Valloric/YouCompleteMe'	"代码自动补全插件1
-Plugin 'Raimondi/delimitMate'	"界定符补全插件
-Plugin 'majutsushi/tagbar'		"标签侧边栏插件
-Plugin 'scrooloose/syntastic'		"语法高亮插件
-Plugin 'ervandew/supertab'		"代码补全插件4
-"Plugin 'Shougo/neocomplete.vim'	"代码补全插件2
-"Plugin 'roxma/vim-hug-neovim-rpc'
-"Plugin 'roxma/nvim-yarp'
-"Plugin 'Shougo/deoplete.nvim'	"代码补全插件3
-
-call vundle#end()
-filetype plugin indent on
-
-"--------------------------------------------------------------------------
-"deoplete插件
-"call deoplete#enable()		"开启deoplete插件
-
-
-"--------------------------------------------------------------------------
-"【OmniCppComplete】
-set nocp
-filetype plugin on
-" configure tags - add additional tags here or comment out not-used ones
-set tags+=D:/ctags/tags/cpp
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-" build tags of your own project with Ctrl-F12
-map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0| pclose|endif
-set completeopt=menuone,menu,longest,preview
-highlight Pmenu	guibg=darkgrey	guifg=black
-highlight PmenuSel	guibg=lightgrey	guifg=black
-"------------------------------------------------------------------------------------
-
+"set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,gbk,cp936,gb2312,gb18030,big5,latin1
+set fileencoding=ansi
+"set termencoding=utf-8
+"===============================================
+"                 原始配置
+"===============================================
 source $VIMRUNTIME/vimrc_example.vim
 set diffexpr=MyDiff()
 function MyDiff()
@@ -90,10 +43,15 @@ function MyDiff()
     let &shellxquote=l:shxq_sav
   endif
 endfunction
+"===============================================
+"                自定义设置
+"===============================================
+"解决菜单乱码
+"source $VIMRUNTIME/delmenu.vim
+"source $VIMRUNTIME/menu.vim
+"解决consle输出乱码
+"language messages zh_CN.utf-8
 
-"---------------------------------------------------------------------------
-"自定义设置
-"---------------------------------------------------------------------------
 colorscheme desert	"主题设置
 set guioptions-=m	" 隐藏菜单栏
 set guioptions-=T	"关闭上侧工具栏
@@ -106,14 +64,83 @@ set sw=4		"缩进尺寸为4个空格
 set smarttab		"按一次backspace就删除4个空格
 set noundofile		"不生成undo文件
 set nobackup		"不生成备份文件
-"解决菜单乱码
-"source $VIMRUNTIME/delmenu.vim
-"source $VIMRUNTIME/menu.vim
-"解决consle输出乱码
-"language messages zh_CN.utf-8
-"---------------------------------------------------------------------------
-"调用编译程序，一键编译或运行
-"---------------------------------------------------------------------------
+"===============================================
+"                Vim插件
+"===============================================
+filetype plugin indent on
+filetype plugin on
+set rtp+=$VIM/vimfiles/bundle/vundle
+let path='$VIM/vimfiles/bundle'
+call vundle#begin('$VIM/vimfiles/bundle')	"调用插件
+"【vundle】（插件管理）
+Plugin 'gmarik/vundle'
+
+"【NERDTree】（树形浏览文件）
+Plugin 'scrooloose/nerdtree'
+
+"【delimitMate】（界定符补全）
+Plugin 'Raimondi/delimitMate'
+
+"【tagbar】（标签侧边栏）
+Plugin 'majutsushi/tagbar'
+
+"【Syntastic】（语法高亮）
+Plugin 'scrooloose/syntastic'
+
+"【SuperTab】（代码补全）
+Plugin 'ervandew/supertab'
+
+"【YouCompleteMe】（代码补全）
+"Plugin 'Valloric/YouCompleteMe'
+
+"【Neocomplete】（代码补全）
+"Plugin 'Shougo/neocomplete.vim'
+"Plugin 'roxma/vim-hug-neovim-rpc'
+"Plugin 'roxma/nvim-yarp'
+
+"【Deoplete】（代码补全）
+"Plugin 'Shougo/deoplete.nvim'
+"call deoplete#enable()	"开启deoplete插件
+
+"【OmniCppComplete】（代码补全）
+"OmniCppComplete
+set tags+=D:\ctags\tags\tags		"设置调用指定tag
+map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>	"建立tag
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0| pclose|endif
+"set completeopt=menuone,menu,longest,preview
+"highlight Pmenu	guibg=darkgrey	guifg=black
+"highlight PmenuSel	guibg=lightgrey	guifg=black
+
+call vundle#end()	"结束插件
+"===============================================
+"                    编译
+"===============================================
+"--------快捷键---------
+"编译快捷键
+map <F5> :call CompileCode()<CR>
+imap <F5> <ESC>:call CompileCode()<CR>
+vmap <F5> <ESC>:call CompileCode()<CR>
+"运行快捷键
+map <F6> :call RunResult()<CR>
+"-----编译或运行--------
+"自动识别C语言或C++
+func! CompileCode()
+        exec "w"
+        if &filetype == "cpp"
+                exec "call CompileGpp()"
+        elseif &filetype == "c"
+                exec "call CompileGcc()"
+        endif
+endfunc
 "编译C语言代码
 func! CompileGcc()
     exec "w"
@@ -158,15 +185,6 @@ func! CompileGpp()
     endif
     exec compilecmd." % ".compileflag
 endfunc
-"自动识别C语言或C++
-func! CompileCode()
-        exec "w"
-        if &filetype == "cpp"
-                exec "call CompileGpp()"
-        elseif &filetype == "c"
-                exec "call CompileGcc()"
-        endif
-endfunc
 "运行程序
 func! RunResult()
         exec "w"
@@ -182,9 +200,3 @@ func! RunResult()
             exec "!java %<"
         endif
 endfunc
-"编译快捷键
-map <F5> :call CompileCode()<CR>
-imap <F5> <ESC>:call CompileCode()<CR>
-vmap <F5> <ESC>:call CompileCode()<CR>
-"运行快捷键
-map <F6> :call RunResult()<CR>
