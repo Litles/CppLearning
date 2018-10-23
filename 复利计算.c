@@ -1,3 +1,4 @@
+//求本利和
 #include <stdio.h>
 #include <math.h>
 
