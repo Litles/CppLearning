@@ -3,8 +3,8 @@ filetype on
 source $VIMRUNTIME/mswin.vim
 behave mswin
 "set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,cp936,gb2312,gb18030,big5,latin1
-set fileencoding=ansi
+set fileencodings=cp936,gb18030,utf-8,ucs-bom,big5,latin1
+"set fileencoding=cp936
 "set termencoding=utf-8
 "=====================================================================
 "                            ‘≠ º≈‰÷√
