@@ -1,4 +1,4 @@
-/*下面程序猜3个数（1-10），每个数有3次机会*/
+//下面程序猜3个数（1-10），每个数有3次机会
 #include<stdlib.h>
 #include<stdio.h>
 #include<time.h>
