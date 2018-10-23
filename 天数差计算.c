@@ -1,5 +1,5 @@
+//求两个日期间的天数差
 #include <stdio.h>
-
 int main()
 {
     const int bigM=31,smaM=30,bigF=29,smaF=28;
