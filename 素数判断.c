@@ -1,5 +1,5 @@
+//判断一个正整数是否为素数
 #include <stdio.h>
-
 int main()
 {
     printf("请输入一个正整数，我将判断它是否是素数\n");
